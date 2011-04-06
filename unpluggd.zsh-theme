@@ -4,7 +4,7 @@ function prompt_char {
 }
 
 PROMPT='
-%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) 
+%U%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) 
 $(prompt_char) '
 RPROMPT=''
 
@@ -12,4 +12,4 @@ ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔"
-ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[orange]%}?"
+ZSH_THEME_GIT_PROMPT_UNTRACKED=" %{$fg[orange]%}✚"
