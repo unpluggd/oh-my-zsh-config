@@ -33,5 +33,7 @@ alias buildout-rebuild="echo 'Cleaning up...'; rm -Rf `pwd`/{eggs,parts,bin,deve
 
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 
+alias flushdns="dscacheutil -flushcache"
+
 # RVM: Ruby Version Manager
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
