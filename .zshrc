@@ -64,10 +64,41 @@ export PATH=/usr/local/Cellar/python/2.7.1/bin:$PATH
 # Custom alias commands
 alias mk=popd
 
-alias buildout="echo 'Building...'; python `pwd`/bootstrap.py; `pwd`/bin/buildout; echo '...done.'"
-alias buildout-clean="echo 'Cleaning up...'; rm -Rfv `pwd`/{eggs,parts,bin,develop-eggs}; rm -fv `pwd`/.installed.cfg; find `pwd` -type f | grep -i \.pyc$ | xargs rm -fv; echo '...done.'"
-alias buildout-rebuild="echo 'Cleaning up...'; rm -Rfv `pwd`/{eggs,parts,bin,develop-eggs}; rm -fv `pwd`/.installed.cfg; find `pwd` -type f | grep -i \.pyc$ | xargs rm -fv; echo '...rebuilding...'; python `pwd`/bootstrap.py; `pwd`/bin/buildout; echo '...done.'"
-alias buildout-foo="echo $(pwd)"
+buildout_here() {
+if [ -e bootstrap.py ]; then
+	print "$fg[yellow]Building...$fg[blue]"
+	python bootstrap.py
+	./bin/buildout
+	print "$fg[green]...done."
+else
+	echo "ERROR: Unable to buildout from this directory; bootstrap.py does not exist."
+fi
+}
+
+buildout_clean() {
+if [ -e bootstrap.py ]; then
+	print "$fg[yellow]Cleaning...$fg[red]"
+	rm -Rfv -- eggs parts bin develop-eggs ./.installed.cfg
+	find . -type f | grep -i \.pyc$ | xargs rm -fv
+	print "$fg[green]...done."
+else
+	echo "ERROR: this does not appear to be a valid buildout directory"
+fi
+}
+
+buildout_rebuild() {
+if [ -e bootstrap.py ]; then
+	buildout_clean
+	buildout_here
+else
+	echo "ERROR: unable to complete; bootstrap.py does not exist."
+fi
+}
+
+
+alias buildout=buildout_here 
+alias buildout-clean=buildout_clean
+alias buildout-rebuild=buildout_rebuild
 
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 
