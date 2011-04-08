@@ -4,7 +4,7 @@ function prompt_char {
 }
 
 PROMPT='
-%U%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) 
+%{$fg[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info) 
 $(prompt_char) '
 RPROMPT=''
 
