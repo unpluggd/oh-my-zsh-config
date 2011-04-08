@@ -56,7 +56,7 @@ setopt HIST_FIND_NO_DUPS
 
 
 # Customize to your needs...
-export PATH=/usr/local/lib/node:/usr/local/sbin:/usr/local/bin:~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+export PATH=/usr/local/lib/node:/usr/local/lib/mongodb/bin:/usr/local/sbin:/usr/local/bin:~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
 # Adding python bin path to PATH
 export PATH=/usr/local/Cellar/python/2.7.1/bin:$PATH
