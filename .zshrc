@@ -103,8 +103,12 @@ alias buildout-clean=buildout_clean
 alias buildout-rebuild=buildout_rebuild
 
 alias updatedb="sudo /usr/libexec/locate.updatedb"
-
 alias flushdns="dscacheutil -flushcache"
+alias ttop="top -F -R -o cpu"
+
+# keybindings
+bindkey    "^[[3~"          delete-char
+bindkey    "^[3;5~"         delete-char
 
 # RVM: Ruby Version Manager
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
