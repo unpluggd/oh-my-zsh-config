@@ -54,6 +54,10 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 
+# zsh performance tweaks
+zstyle ':completion:*' accept-exact '*(N)' # take the first part of the path to be exact
+zstyle ':completion:*' use-cache on # use a cache file
+zstyle ':completion:*' cache-path ~/.zshcache # specify the cache file to use (separate file for each machine)
 
 # Main PATH var
 export PATH=/usr/local/lib/mongodb/bin:/usr/local/sbin:/usr/local/bin:~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
