@@ -108,7 +108,7 @@ alias buildout-rebuild=buildout_rebuild
 
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias flushdns="dscacheutil -flushcache"
-alias ttop="top -F -R -o cpu"
+alias ttop="top -R -o cpu -s 2"
 
 # keybindings
 bindkey    "^[[3~"          delete-char
