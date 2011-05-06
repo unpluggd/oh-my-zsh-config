@@ -66,6 +66,7 @@ export PATH=/usr/local/lib/mongodb/bin:/usr/local/sbin:/usr/local/bin:~/.rvm/gem
 export PATH=/usr/local/lib/node:$PATH # node 
 export PATH=/usr/local/Cellar/python/2.7.1/bin:$PATH # python 
 export PATH=/usr/local/Cellar/php/5.3.5/bin:$PATH # php
+export PATH=~/.my-zsh/tools:$PATH # custom scripts
 
 # Custom alias commands
 alias mk=popd
