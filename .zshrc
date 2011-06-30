@@ -116,7 +116,8 @@ alias buildout-rebuild=buildout_rebuild
 alias mk=popd
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias flushdns="dscacheutil -flushcache"
-alias ttop="top -F -R -o cpu"
+alias ttop="top -R -o cpu -s 2"
+alias eject="drutil tray eject"
 
 # fix annoying autocorrect errors
 alias task="nocorrect task"
