@@ -111,6 +111,10 @@ alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias flushdns="dscacheutil -flushcache"
 alias ttop="top -F -R -o cpu"
 
+# fix annoying autocorrect errors
+alias task="nocorrect task"
+alias mono="nocorrect mono"
+
 # keybindings
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
