@@ -1,17 +1,17 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
-# Set to the name theme to load.
-# Look in ~/.oh-my-zsh/themes/
+# Set my custom theme to load.
+# Remember to symlink! ./unpluggd.zsh-theme -> ~/.oh-my-zsh/themes/
 export ZSH_THEME="unpluggd"
 
-# Set to this to use case-sensitive completion
+# Set this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
 
-# Comment this out to disable weekly auto-update checks
+# Set this to disable weekly auto-update checks
 # export DISABLE_AUTO_UPDATE="true"
 
-# Uncomment following line if you want to disable colors in ls
+# Set this if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -55,21 +55,26 @@ setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 
 # zsh performance tweaks
-zstyle ':completion:*' accept-exact '*(N)' # take the first part of the path to be exact
-zstyle ':completion:*' use-cache on # use a cache file
-zstyle ':completion:*' cache-path ~/.zshcache # specify the cache file to use (separate file for each machine)
+# .. take the first part of the path to be exact
+zstyle ':completion:*' accept-exact '*(N)' 
+# .. use a cache file
+zstyle ':completion:*' use-cache on 
+# .. and then specify the cache file to use (not added to repo: separate file for each machine)
+zstyle ':completion:*' cache-path ~/.zshcache 
 
 # Main PATH var
 export PATH=/usr/local/lib/mongodb/bin:/usr/local/sbin:/usr/local/bin:~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
 # Adding additional items to the path
+# these are all installed via mac homebrew
 export PATH=/usr/local/lib/node:$PATH # node 
 export PATH=/usr/local/Cellar/python/2.7.1/bin:$PATH # python 
 export PATH=/usr/local/Cellar/php/5.3.5/bin:$PATH # php
 export PATH=~/.my-zsh/tools:$PATH # custom scripts
 
-# Custom alias commands
-alias mk=popd
+# I use zc.buildout for all my python projects,
+# so here are some helper methods which are aliased
+# as commands below.
 
 buildout_here() {
 if [ -e bootstrap.py ]; then
@@ -102,11 +107,13 @@ else
 fi
 }
 
-
+# buildout commands
 alias buildout=buildout_here 
 alias buildout-clean=buildout_clean
 alias buildout-rebuild=buildout_rebuild
 
+# Custom alias commands
+alias mk=popd
 alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias flushdns="dscacheutil -flushcache"
 alias ttop="top -F -R -o cpu"
@@ -115,9 +122,12 @@ alias ttop="top -F -R -o cpu"
 alias task="nocorrect task"
 alias mono="nocorrect mono"
 
-# keybindings
+# fix keybindings on osx
+# .. delete key
 bindkey    "^[[3~"          delete-char
+# .. shift-delete
 bindkey    "^[3;5~"         delete-char
 
 # RVM: Ruby Version Manager
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+# This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
