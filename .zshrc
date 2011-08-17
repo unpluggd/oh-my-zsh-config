@@ -16,7 +16,7 @@ export ZSH_THEME="unpluggd"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx brew git git-flow github svn npm rvm)
+plugins=(osx brew git git-flow github svn node npm rvm pip taskwarrior)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -122,12 +122,17 @@ alias eject="drutil tray eject"
 # fix annoying autocorrect errors
 alias task="nocorrect task"
 alias mono="nocorrect mono"
+alias fop="nocorrect fop"
 
 # fix keybindings on osx
+# .. emacs bindings
+# bindkey -e
 # .. delete key
-bindkey    "^[[3~"          delete-char
+bindkey "^[[3~" delete-char
 # .. shift-delete
-bindkey    "^[3;5~"         delete-char
+bindkey "^[3;5~" delete-char
+bindkey "^[[5C" backward-word
+bindkey "^[[5C" forward-word 
 
 # RVM: Ruby Version Manager
 # This loads RVM into a shell session.
