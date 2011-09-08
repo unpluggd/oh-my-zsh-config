@@ -63,14 +63,19 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache 
 
 # Main PATH var
-export PATH=/usr/local/lib/mongodb/bin:/usr/local/sbin:/usr/local/bin:~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:/Library/Frameworks/Python.framework/Versions/Current/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+export PATH=/usr/local/lib:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 
 # Adding additional items to the path
 # these are all installed via mac homebrew
+export PATH=/usr/local/lib/mongodb/bin:$PATH # mongo
 export PATH=/usr/local/lib/node:$PATH # node 
-export PATH=/usr/local/Cellar/python/2.7.1/bin:$PATH # python 
 export PATH=/usr/local/Cellar/php/5.3.5/bin:$PATH # php
+export PATH=~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:$PATH
 export PATH=~/.my-zsh/tools:$PATH # custom scripts
+
+# Adding pythonbrew to the mix
+export PYTHONBREW_ROOT=/usr/local/Library/pythonbrew
+[[ -s /usr/local/Library/pythonbrew/etc/bashrc ]] && source /usr/local/Library/pythonbrew/etc/bashrc
 
 # I use zc.buildout for all my python projects,
 # so here are some helper methods which are aliased
