@@ -112,6 +112,16 @@ else
 fi
 }
 
+random_password() {
+    CHAR="[:alnum:]"
+    #cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
+    env LC_CTYPE=C tr -dc "a-zA-Z0-9-_" < /dev/urandom | head -c ${1:-32}
+    echo
+}
+
+alias genpass=random_password
+alias makepassword=random_password
+
 # buildout commands
 alias buildout=buildout_here 
 alias buildout-clean=buildout_clean
