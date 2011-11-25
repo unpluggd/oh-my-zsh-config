@@ -134,6 +134,7 @@ random_password() {
 
 alias genpass=random_password
 alias makepassword=random_password
+alias pw="$LANG=C tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | fold -w 12 | head -n 1"
 
 # Custom alias commands
 alias mk=popd
