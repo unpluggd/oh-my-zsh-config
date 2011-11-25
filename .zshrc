@@ -133,6 +133,7 @@ alias updatedb="sudo /usr/libexec/locate.updatedb"
 alias flushdns="dscacheutil -flushcache"
 alias ttop="top -R -o cpu -s 2"
 alias eject="drutil tray eject"
+alias dl="aria2c -x2"
 
 # fix annoying autocorrect errors
 alias task="nocorrect task"
