@@ -112,6 +112,19 @@ else
 fi
 }
 
+# buildout commands
+alias buildout=buildout_here 
+alias buildout-clean=buildout_clean
+alias buildout-rebuild=buildout_rebuild
+
+#mkdir, cd into it
+function mkcd {
+    mkdir -p $1
+    cd $1
+}
+
+alias mkcd=mkcd
+
 random_password() {
     CHAR="[:alnum:]"
     #cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
@@ -121,11 +134,6 @@ random_password() {
 
 alias genpass=random_password
 alias makepassword=random_password
-
-# buildout commands
-alias buildout=buildout_here 
-alias buildout-clean=buildout_clean
-alias buildout-rebuild=buildout_rebuild
 
 # Custom alias commands
 alias mk=popd
