@@ -118,9 +118,9 @@ alias buildout-clean=buildout_clean
 alias buildout-rebuild=buildout_rebuild
 
 #mkdir, cd into it
-function mkcd {
-    mkdir -p $1
-    cd $1
+mkcd() {
+    mkdir -p "$1"
+    cd "$1"
 }
 
 alias mkcd=mkcd
