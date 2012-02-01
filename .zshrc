@@ -16,7 +16,9 @@ export ZSH_THEME="unpluggd"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(osx brew git git-flow github svn node npm rvm pip taskwarrior)
+#plugins=(osx brew git git-flow github svn node npm rvm pip taskwarrior)
+# hiding some rarely used plugins for performance
+plugins=(osx brew git git-flow github node npm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -70,7 +72,8 @@ export PATH=/usr/local/lib:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbi
 export PATH=/usr/local/lib/mongodb/bin:$PATH # mongo
 export PATH=/usr/local/lib/node:$PATH # node 
 export PATH=/usr/local/Cellar/php/5.3.5/bin:$PATH # php
-export PATH=~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:$PATH
+# commented out due to lack of use
+#export PATH=~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:$PATH
 export PATH=~/.my-zsh/tools:$PATH # custom scripts
 
 # Adding pythonbrew to the mix
@@ -117,24 +120,28 @@ alias buildout=buildout_here
 alias buildout-clean=buildout_clean
 alias buildout-rebuild=buildout_rebuild
 
-#mkdir, cd into it
+# mkdir then cd into it
 mkcd() {
     mkdir -p "$1"
     cd "$1"
 }
-
 alias mkcd=mkcd
 
+# generate a random password 
 random_password() {
     CHAR="[:alnum:]"
-    #cat /dev/urandom | tr -cd "$CHAR" | head -c ${1:-32}
     env LC_CTYPE=C tr -dc "a-zA-Z0-9-_" < /dev/urandom | head -c ${1:-32}
     echo
 }
+# from the terminal "pw N" to generate an N-chr password
+alias pw=random_password
 
-alias genpass=random_password
-alias makepassword=random_password
-alias pw="$LANG=C tr -dc 'A-Za-z0-9!@#$%^&*' < /dev/urandom | fold -w 12 | head -n 1"
+# shortcut for downloading git repositories from our main git server
+git_down() {
+    cd ~/Projects
+    git clone git@git.exstatik.com:$*.git
+}
+alias gitdown=git_down
 
 # Custom alias commands
 alias mk=popd
@@ -161,4 +168,5 @@ bindkey "^[[5C" forward-word
 
 # RVM: Ruby Version Manager
 # This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+# commented-out due to rare usage
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
