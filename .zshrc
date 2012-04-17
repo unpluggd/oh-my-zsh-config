@@ -80,6 +80,11 @@ export PATH=~/.my-zsh/tools:$PATH # custom scripts
 export PYTHONBREW_ROOT=/usr/local/Library/pythonbrew
 [[ -s /usr/local/Library/pythonbrew/etc/bashrc ]] && source /usr/local/Library/pythonbrew/etc/bashrc
 
+# Make 'help' a backup for 'man'
+man () {
+/usr/bin/man $@ || (help $@ 2> /dev/null && help $@ | less)
+}
+
 # I use zc.buildout for all my python projects,
 # so here are some helper methods which are aliased
 # as commands below.
