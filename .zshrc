@@ -58,11 +58,11 @@ setopt HIST_FIND_NO_DUPS
 
 # zsh performance tweaks
 # .. take the first part of the path to be exact
-zstyle ':completion:*' accept-exact '*(N)' 
+zstyle ':completion:*' accept-exact '*(N)'
 # .. use a cache file
-zstyle ':completion:*' use-cache on 
+zstyle ':completion:*' use-cache on
 # .. and then specify the cache file to use (not added to repo: separate file for each machine)
-zstyle ':completion:*' cache-path ~/.zshcache 
+zstyle ':completion:*' cache-path ~/.zshcache
 
 # Main PATH var
 export PATH=/usr/local/lib:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
@@ -70,7 +70,7 @@ export PATH=/usr/local/lib:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbi
 # Adding additional items to the path
 # these are all installed via mac homebrew
 export PATH=/usr/local/lib/mongodb/bin:$PATH # mongo
-export PATH=/usr/local/lib/node:$PATH # node 
+export PATH=/usr/local/lib/node:$PATH # node
 export PATH=/usr/local/Cellar/php/5.3.5/bin:$PATH # php
 # commented out due to lack of use
 #export PATH=~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:$PATH
@@ -88,6 +88,13 @@ man () {
 # I use zc.buildout for all my python projects,
 # so here are some helper methods which are aliased
 # as commands below.
+
+buildout_init() {
+if [ -e bootstrap.py ]; then
+    rm -f bootstrap.py
+fi
+wget http://downloads.buildout.org/2/bootstrap.py
+}
 
 buildout_here() {
 if [ -e bootstrap.py ]; then
@@ -121,9 +128,10 @@ fi
 }
 
 # buildout commands
-alias buildout=buildout_here 
+alias buildout=buildout_here
 alias buildout-clean=buildout_clean
 alias buildout-rebuild=buildout_rebuild
+alias buildout-init=buildout_init
 
 # mkdir then cd into it
 mkcd() {
@@ -132,7 +140,7 @@ mkcd() {
 }
 alias mkcd=mkcd
 
-# generate a random password 
+# generate a random password
 random_password() {
     CHAR="[:alnum:]"
     env LC_CTYPE=C tr -dc "a-zA-Z0-9-_" < /dev/urandom | head -c ${1:-32}
@@ -172,6 +180,7 @@ alias dl="aria2c -x2"
 alias task="nocorrect task"
 alias mono="nocorrect mono"
 alias fop="nocorrect fop"
+alias mg="nocorrect mg"
 
 # fix keybindings on osx
 # .. emacs bindings
@@ -181,9 +190,20 @@ bindkey "^[[3~" delete-char
 # .. shift-delete
 bindkey "^[3;5~" delete-char
 bindkey "^[[5C" backward-word
-bindkey "^[[5C" forward-word 
+bindkey "^[[5C" forward-word
 
 # RVM: Ruby Version Manager
 # This loads RVM into a shell session.
 # commented-out due to rare usage
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+source /usr/local/Library/pythonbrew/pythons/Python-2.7.2/bin/virtualenvwrapper.sh
+
+# Java Home
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+if [ -n "$INSIDE_EMACS" ]; then
+  chpwd() { print -P "\033AnSiTc %d" }
+  print -P "\033AnSiTu %n"
+  print -P "\033AnSiTc %d"
+fi
