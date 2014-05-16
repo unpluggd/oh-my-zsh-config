@@ -1,6 +1,16 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
+# Add completions if available...
+
+if [ -d /usr/local/share/zsh/site-functions ]; then
+fpath=(/usr/local/share/zsh/site-functions $fpath)
+fi
+
+if [ -d /usr/local/share/zsh-completions ]; then
+fpath=(/usr/local/share/zsh-completions $fpath)
+fi
+
 # Set my custom theme to load.
 # Remember to symlink! ./unpluggd.zsh-theme -> ~/.oh-my-zsh/themes/
 export ZSH_THEME="unpluggd"
@@ -18,7 +28,7 @@ export ZSH_THEME="unpluggd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(osx brew git git-flow github svn node npm rvm pip taskwarrior)
 # hiding some rarely used plugins for performance
-plugins=(osx brew git git-flow github node npm)
+plugins=(osx brew git git-flow github node npm mercurial)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -27,6 +37,7 @@ setopt AUTO_CD
 setopt AUTO_PUSHD
 setopt AUTO_NAME_DIRS
 setopt GLOB_COMPLETE
+setopt EXTENDEDGLOB
 setopt PUSHD_MINUS
 # setopt PUSHD_SILENT
 setopt PUSHD_TO_HOME
@@ -42,9 +53,9 @@ HISTFILE=~/.history
 SAVEHIST=10000
 HISTSIZE=10000
 
-setopt APPEND_HISTORY # don't overwrite history; append instead
-setopt INC_APPEND_HISTORY # append after each command
-setopt SHARE_HISTORY # share history between shells
+setopt APPEND_HISTORY  # don't overwrite history; append instead
+setopt INC_APPEND_HISTORY  # append after each command
+setopt SHARE_HISTORY  # share history between shells
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
@@ -73,12 +84,21 @@ export PATH=/usr/local/lib/mongodb/bin:$PATH # mongo
 export PATH=/usr/local/lib/node:$PATH # node
 export PATH=/usr/local/Cellar/php/5.3.5/bin:$PATH # php
 # commented out due to lack of use
-#export PATH=~/.rvm/gems/ruby-1.9.2-p136/bin:~/.rvm/gems/ruby-1.9.2-p136@global/bin:~/.rvm/rubies/ruby-1.9.2-p136/bin:~/.rvm/bin:$PATH
 export PATH=~/.my-zsh/tools:$PATH # custom scripts
 
-# Adding pythonbrew to the mix
-export PYTHONBREW_ROOT=/usr/local/Library/pythonbrew
-[[ -s /usr/local/Library/pythonbrew/etc/bashrc ]] && source /usr/local/Library/pythonbrew/etc/bashrc
+# Adding pyenv
+if [ ! -d $HOME/.pyenv ]; then
+    echo "ERROR: pyenv not found. Installing..."
+    git clone git://github.com/yyuu/pyenv.git $HOME/.pyenv
+fi
+
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+
+# make the python repl better!
+# export PYTHONSTARTUP=$HOME/.pythonrc.py
+# kill creation of .pyc files
+# export PYTHONDONTWRITEBYTECODE=1
 
 # Make 'help' a backup for 'man'
 man () {
@@ -149,13 +169,6 @@ random_password() {
 # from the terminal "pw N" to generate an N-chr password
 alias pw=random_password
 
-# shortcut for downloading git repositories from our main git server
-git_down() {
-    cd ~/Projects
-    git clone git@git.exstatik.com:$*.git
-}
-alias gitdown=git_down
-
 # hide/show desktop icons on lion & re-launch TotalFinder
 hide_desktop_icons() {
     defaults write com.apple.finder CreateDesktop -bool false
@@ -175,6 +188,8 @@ alias flushdns="dscacheutil -flushcache"
 alias ttop="top -R -o cpu -s 2"
 alias eject="drutil tray eject"
 alias dl="aria2c -x2"
+alias htop="sudo htop"
+alias iftop="sudo iftop"
 
 # fix annoying autocorrect errors
 alias task="nocorrect task"
@@ -192,18 +207,23 @@ bindkey "^[3;5~" delete-char
 bindkey "^[[5C" backward-word
 bindkey "^[[5C" forward-word
 
-# RVM: Ruby Version Manager
-# This loads RVM into a shell session.
-# commented-out due to rare usage
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-source /usr/local/Library/pythonbrew/pythons/Python-2.7.2/bin/virtualenvwrapper.sh
-
 # Java Home
-export JAVA_HOME=$(/usr/libexec/java_home)
+[[ -s /usr/libexec/java_home ]] && export JAVA_HOME=$(/usr/libexec/java_home)
 
 if [ -n "$INSIDE_EMACS" ]; then
   chpwd() { print -P "\033AnSiTc %d" }
   print -P "\033AnSiTu %n"
   print -P "\033AnSiTc %d"
+fi
+
+# allow using homeshick from zsh
+alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
+
+# enable syntax highlighting
+_syntax_highlighting="/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+if [ -e $_syntax_highlighting ]; then
+    source $_syntax_highlighting
+else
+    brew install -y zsh-syntax-highlighting
+    source $_syntax_highlighting
 fi
