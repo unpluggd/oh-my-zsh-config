@@ -1,0 +1,4 @@
+# History tweaks
+HISTFILE=~/.history
+SAVEHIST=10000
+HISTSIZE=10000
